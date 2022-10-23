@@ -53,11 +53,11 @@ namespace bintree {
         }
 
         static TNodePtr createLeaf(T v) {
-            return std::make_shared<TNode>(v);
+            return std::make_shared<TNode>(TNode(v));
         }
 
-        static TNodePtr fork(T v, TNode* left, TNode* right) {
-            TNodePtr ptr = std::make_shared<TNode>(v, left, right);
+        static TNodePtr fork(T v, TNodePtr left, TNodePtr right) {
+            TNodePtr ptr = std::make_shared<TNode>(TNode(v, left, right));
             setParent(ptr->getLeft(), ptr);
             setParent(ptr->getRight(), ptr);
             return ptr;
@@ -102,7 +102,7 @@ namespace bintree {
             : value(v)
         {
         }
-        TNode(T v, TNode* left, TNode* right)
+        TNode(T v, TNodePtr left, TNodePtr right)
             : value(v)
             , left(left)
             , right(right)
